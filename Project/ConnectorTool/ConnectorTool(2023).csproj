@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">Any CPU</Platform>
+    <ProjectGuid>{2DFFD42E-2D82-4411-8165-82D33B1A2AA3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ConnectorTool</RootNamespace>
+    <AssemblyName>ConnectorTool</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>preview</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <ApplicationIcon>..\favicon.ico</ApplicationIcon>
+    <BaseIntermediateOutputPath>D:\Temp\obj\Architexor\ConnectorTool</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration) == 'Debug'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <NoWarn>IDE1006</NoWarn>
+    <IntermediateOutputPath>D:\Temp\intermediate\Architexor\ConnectorTool\Debug\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration) == 'Release'">
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>IDE1006</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <IntermediateOutputPath>D:\Temp\intermediate\Architexor\ConnectorTool\Release\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);REVIT2023</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RevitVersion Condition="$(DefineConstants.Contains('2020'))">2020</RevitVersion>
+    <RevitVersion Condition="$(DefineConstants.Contains('2021'))">2021</RevitVersion>
+    <RevitVersion Condition="$(DefineConstants.Contains('2022'))">2022</RevitVersion>
+    <RevitVersion Condition="$(DefineConstants.Contains('2023'))">2023</RevitVersion>
+    <RevitVersion Condition="$(DefineConstants.Contains('2024'))">2024</RevitVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputPath>D:\Temp\bin\Architexor\$(Configuration)\$(RevitVersion)\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(RevitVersion) == '2019' OR $(RevitVersion) == '2020'">
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(RevitVersion) == '2021' OR $(RevitVersion) == '2022' OR $(RevitVersion) == '2023' OR $(RevitVersion) == '2024'">
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Gma.System.MouseKeyHook, Version=5.7.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MouseKeyHook.5.7.1\lib\net48\Gma.System.MouseKeyHook.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MSCOMCTL, Version=10.0.4504.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="RevitAPI">
+      <HintPath>C:\Program Files\Autodesk\Revit $(RevitVersion)\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>C:\Program Files\Autodesk\Revit $(RevitVersion)\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIIFC">
+      <HintPath>C:\Program Files\Autodesk\Revit $(RevitVersion)\RevitAPIIFC.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AdWindows">
+      <HintPath>C:\Program Files\Autodesk\Revit $(RevitVersion)\AdWindows.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application.cs" />
+    <Compile Include="Information\TConElemInfo.cs" />
+    <Compile Include="Information\TConInfo.cs" />
+    <Compile Include="Information\TConTypeParam.cs" />
+    <Compile Include="Location\TConLocation.cs" />
+    <Compile Include="Base\TLocation.cs" />
+    <Compile Include="Base\TObject.cs" />
+    <Compile Include="Base\TGeometry.cs" />
+    <Compile Include="Command\Command.cs" />
+    <Compile Include="Object\TConnector.cs" />
+    <Compile Include="Object\TConVoidObj.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Storage\StorageData.cs" />
+    <Compile Include="Storage\StorageManager.cs" />
+    <Compile Include="TypeManager.cs" />
+    <Compile Include="Engine\ConnectorBuilder.cs" />
+    <Compile Include="Forms\FrmGlulamTConnector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmGlulamTConnector.Designer.cs">
+      <DependentUpon>FrmGlulamTConnector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Engine\ConnectorData.cs" />
+    <Compile Include="Storage\FieldData.cs" />
+    <Compile Include="Storage\SchemaDataWrapper.cs" />
+    <Compile Include="Storage\SchemaWrapper.cs" />
+    <Compile Include="Storage\StorageUtility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\FrmGlulamTConnector.resx">
+      <DependentUpon>FrmGlulamTConnector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ATXComponents\ATXComponents.csproj">
+      <Project>{e328af67-f010-4853-b27d-75b2b6714e86}</Project>
+      <Name>ATXComponents</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{D312B4FC-EF20-4993-AE3C-1875B255CF8C}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Base\Base%28$(RevitVersion)%29.csproj">
+      <Project>{F77B1A8C-C0D4-42AE-9544-2D4DD7650581}</Project>
+      <Name>Base</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\btn_next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_previous.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>powershell -Command "(gc $(ProjectDir)..\AddInFiles\Architexor.ConnectorTool.addin) -replace 'DLL File URL', 'D:\Temp\bin\Architexor\$(Configuration)\$(RevitVersion)\ConnectorTool.dll' | Out-File -Encoding utf8 tmp"
+copy tmp "$(ProgramData)\Autodesk\REVIT\Addins\$(RevitVersion)\Architexor.ConnectorTool.addin"
+del tmp</PostBuildEvent>
+  </PropertyGroup>
+</Project>

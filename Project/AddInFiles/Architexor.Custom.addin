@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>Architexor.Custom</Name>
+    <FullClassName>Architexor.Custom.Application</FullClassName>
+    <Assembly>DLL File URL</Assembly>
+    <AddInId>FAE01E0C-2BA9-44F0-8BF8-8A8F2D48A90B</AddInId>
+    <VendorId>ADSK</VendorId>
+    <VendorDescription>Architexor, Inc, www.architexor.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>

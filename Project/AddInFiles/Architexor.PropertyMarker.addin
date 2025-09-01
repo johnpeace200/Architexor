@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>Architexor.PropertyMarker</Name>
+    <FullClassName>Architexor.PropertyMarker.Application</FullClassName>
+    <Assembly>DLL File URL</Assembly>
+    <AddInId>6E6C3616-7224-44E8-9BEC-ECA30BC55E20</AddInId>
+    <VendorId>ADSK</VendorId>
+    <VendorDescription>Architexor, Inc, www.architexor.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>

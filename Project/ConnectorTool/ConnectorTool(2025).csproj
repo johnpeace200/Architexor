@@ -1,0 +1,98 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+		<PlatformTarget>x64</PlatformTarget>
+		<UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <DefineConstants>$(DefineConstants);REVIT2025</DefineConstants>
+		<StartAction>Program</StartAction>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RevitVersion Condition="$(DefineConstants.Contains('2025'))">2025</RevitVersion>
+    <RevitVersion Condition="$(DefineConstants.Contains('2026'))">2026</RevitVersion>
+    <RevitVersion Condition="$(DefineConstants.Contains('2027'))">2027</RevitVersion>
+    <RevitVersion Condition="$(DefineConstants.Contains('2028'))">2028</RevitVersion>
+    <RevitVersion Condition="$(DefineConstants.Contains('2029'))">2029</RevitVersion>
+    <RevitVersion Condition="$(DefineConstants.Contains('2030'))">2030</RevitVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+		<StartProgram>C:\Program Files\Autodesk\Revit $(RevitVersion)\Revit.exe</StartProgram>
+    <OutputPath>D:\Temp\bin\Architexor\$(Configuration)\$(RevitVersion)\</OutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AssemblyName>ConnectorTool</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  </PropertyGroup>
+	
+  <PropertyGroup>
+    <PostBuildEvent>powershell -Command "(gc $(MSBuildProjectDirectory)\..\AddInFiles\Architexor.ConnectorTool.addin) -replace 'DLL File URL', 'D:\Temp\bin\Architexor\$(Configuration)\$(RevitVersion)\ConnectorTool.dll' | Out-File -Encoding utf8 tmp"
+copy tmp "$(ProgramData)\Autodesk\REVIT\Addins\$(RevitVersion)\Architexor.ConnectorTool.addin"
+del tmp</PostBuildEvent>
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <Compile Remove="Base\Bolt.cs" />
+    <Compile Remove="Base\ConnectorGeometry.cs" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.WindowsDesktop.App" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\btn_next.png" />
+    <EmbeddedResource Include="Resources\btn_previous.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MouseKeyHook" Version="5.7.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ATXComponents\ATXComponents.csproj" />
+    <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\Base\Base%28$(RevitVersion)%29.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AdWindows">
+      <HintPath>C:\Program Files\Autodesk\Revit $(RevitVersion)\AdWindows.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPI">
+      <HintPath>C:\Program Files\Autodesk\Revit $(RevitVersion)\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIIFC">
+      <HintPath>C:\Program Files\Autodesk\Revit $(RevitVersion)\RevitAPIIFC.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>C:\Program Files\Autodesk\Revit $(RevitVersion)\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Forms\FrmGlulamTConnector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

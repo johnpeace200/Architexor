@@ -1,0 +1,97 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+		<PlatformTarget>x64</PlatformTarget>
+		<UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <DefineConstants>$(DefineConstants);REVIT2025</DefineConstants>
+		<StartAction>Program</StartAction>
+    <LangVersion>preview</LangVersion>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RevitVersion Condition="$(DefineConstants.Contains('2025'))">2025</RevitVersion>
+    <RevitVersion Condition="$(DefineConstants.Contains('2026'))">2026</RevitVersion>
+    <RevitVersion Condition="$(DefineConstants.Contains('2027'))">2027</RevitVersion>
+    <RevitVersion Condition="$(DefineConstants.Contains('2028'))">2028</RevitVersion>
+    <RevitVersion Condition="$(DefineConstants.Contains('2029'))">2029</RevitVersion>
+    <RevitVersion Condition="$(DefineConstants.Contains('2030'))">2030</RevitVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+		<StartProgram>C:\Program Files\Autodesk\Revit $(RevitVersion)\Revit.exe</StartProgram>
+    <OutputPath>D:\Temp\bin\Architexor\$(Configuration)\$(RevitVersion)\</OutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AssemblyName>Architexor.Base</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.WindowsDesktop.App" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\btn_halflap.png" />
+    <EmbeddedResource Include="Resources\btn_jointboard.png" />
+    <EmbeddedResource Include="Resources\btn_splitslab.png" />
+    <EmbeddedResource Include="Resources\btn_splitwall.png" />
+    <EmbeddedResource Include="Resources\btn_3dparameters.png" />
+    <EmbeddedResource Include="Resources\btn_modify.png" />
+    <EmbeddedResource Include="Resources\btn_registration.png" />
+    <EmbeddedResource Include="Resources\btn_select.png" />
+    <EmbeddedResource Include="Resources\btn_t_connector.png" />
+    <EmbeddedResource Include="Resources\checkmark.png" />
+    <EmbeddedResource Include="Resources\closemark.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MouseKeyHook" Version="5.7.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
+    <!--<ProjectReference Include="..\License\ATXLicense\ATXLicense.csproj" />
+    <ProjectReference Include="..\License\QLicense\QLicense.csproj" />-->
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AdWindows">
+      <HintPath>C:\Program Files\Autodesk\Revit $(RevitVersion)\AdWindows.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPI">
+      <HintPath>C:\Program Files\Autodesk\Revit $(RevitVersion)\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIIFC">
+      <HintPath>C:\Program Files\Autodesk\Revit $(RevitVersion)\RevitAPIIFC.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>C:\Program Files\Autodesk\Revit $(RevitVersion)\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Forms\FrmRegistration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

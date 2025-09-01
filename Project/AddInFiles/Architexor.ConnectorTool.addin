@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>Architexor.ConnectorTool</Name>
+    <FullClassName>Architexor.ConnectorTool.Application</FullClassName>
+    <Assembly>DLL File URL</Assembly>
+    <AddInId>2DFFD42E-2D82-4411-8165-82D33B1A2AA3</AddInId>
+    <VendorId>ADSK</VendorId>
+    <VendorDescription>Architexor, Inc, www.architexor.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>
